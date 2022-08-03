@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:my_recipe_api/utilities/color.dart';
 import 'package:my_recipe_api/widgets/bigText.dart';
-import 'package:my_recipe_api/widgets/foodbodyPage.dart';
+import 'package:my_recipe_api/views/foodbodyPage.dart';
 import 'package:my_recipe_api/widgets/smallText.dart';
 
 class HomePage extends StatelessWidget {
@@ -22,10 +22,16 @@ class HomePage extends StatelessWidget {
               children: [
                 Column(
                   children: [
-                    BigText(text: 'Indonesia', textColor: ColorData.mainColor,),
+                    BigText(
+                      text: 'Indonesia',
+                      textColor: ColorData.mainColor,
+                    ),
                     Row(
                       children: [
-                        SmallText(text: 'Jakarta', textColor: Colors.black,),
+                        SmallText(
+                          text: 'Jakarta',
+                          textColor: Colors.black,
+                        ),
                         Icon(Icons.arrow_drop_down_rounded)
                       ],
                     ),
@@ -38,20 +44,28 @@ class HomePage extends StatelessWidget {
                     borderRadius: BorderRadius.circular(15),
                     color: ColorData.buttonColor,
                   ),
-                  child: Center(child: Icon(Icons.search, size: 20, color: Colors.white,)),
+                  child: Center(
+                      child: Icon(
+                    Icons.search,
+                    size: 20,
+                    color: Colors.white,
+                  )),
                 )
               ],
             ),
           ),
-          SizedBox(height: 20,),
+          SizedBox(
+            height: 20,
+          ),
           //body
-          FoodPageBody(),
+          Expanded(
+            child: SingleChildScrollView(
+              scrollDirection: Axis.vertical,
+              child: FoodPageBody(),
+            ),
+          ),
         ],
       ),
     );
   }
 }
-
-
-
-

@@ -63,7 +63,115 @@ class _FoodPageBodyState extends State<FoodPageBody> {
             activeShape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(5.0)),
           ),
-        )
+        ),
+        SizedBox(
+          height: 30,
+        ),
+        Container(
+          margin: EdgeInsets.only(left: 20),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              BigText(text: "Popular", textColor: Colors.black87),
+              SizedBox(
+                width: 10,
+              ),
+              Container(
+                margin: EdgeInsets.only(bottom: 3),
+                child: BigText(text: ".", textColor: Colors.grey),
+              ),
+              SizedBox(
+                width: 10,
+              ),
+              Container(
+                margin: EdgeInsets.only(bottom: 2),
+                child: SmallText(text: "Food Pairing", textColor: Colors.grey),
+              ),
+            ],
+          ),
+        ),
+        SizedBox(height: 20,),
+        ListView.builder(
+          shrinkWrap: true,
+          physics: NeverScrollableScrollPhysics(),
+          itemCount: 10,
+          itemBuilder: (context, index) {
+            return Container(
+              margin: EdgeInsets.only(left: 20, bottom: 20),
+              child: Row(
+                children: [
+                  Container(
+                    height: 120,
+                    width: 120,
+                    decoration: BoxDecoration(
+                      color: Colors.amber,
+                      borderRadius: BorderRadius.circular(15),
+                      image: DecorationImage(
+                          image: AssetImage("assets/img1.jpg"),
+                          fit: BoxFit.cover),
+                    ),
+                  ),
+                  Expanded(
+                    child: Container(
+                      // width: 230,
+                      margin: EdgeInsets.only(right: 10),
+                      height: 100,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.only(
+                            topRight: Radius.circular(20),
+                            bottomRight: Radius.circular(20),
+                          ),
+                          color: Colors.white),
+                      child: Container(
+                        margin: EdgeInsets.only(left: 10),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            BigText(
+                                text: "Nutritious fruit meal in blabla",
+                                textColor: Colors.black),
+                            SizedBox(
+                              height: 10,
+                            ),
+                            SmallText(
+                                text: "With chinese characteristics",
+                                textColor: Colors.grey),
+                            SizedBox(
+                              height: 20,
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                IconAndWidgets(
+                                  iconData: Icons.circle_sharp,
+                                  iconColor: Colors.yellow.shade600,
+                                  txtColor: Colors.grey,
+                                  Text: 'Normal',
+                                ),
+                                IconAndWidgets(
+                                  iconData: Icons.location_on,
+                                  iconColor: ColorData.mainColor,
+                                  txtColor: Colors.grey,
+                                  Text: '1.7Km',
+                                ),
+                                IconAndWidgets(
+                                  iconData: Icons.access_time,
+                                  iconColor: Colors.yellow.shade900,
+                                  txtColor: Colors.grey,
+                                  Text: '32mins',
+                                ),
+                              ],
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
+                  )
+                ],
+              ),
+            );
+          },
+        ),
       ],
     );
   }

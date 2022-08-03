@@ -7,15 +7,22 @@ class BigText extends StatelessWidget {
   final String text;
   final Color textColor;
   const BigText({
-    Key? key,required this.text, required this.textColor,
+    Key? key,
+    required this.text,
+    required this.textColor,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+  double screenHeight = MediaQuery.of(context).size.height;
+  double screenWidth = MediaQuery.of(context).size.width;
+
     return Text(
-      "${text}",
-      style:
-          TextStyle(fontSize: 20, fontWeight: FontWeight.w500, color: textColor),
+      text,
+      maxLines: 1,
+      overflow: TextOverflow.ellipsis,
+      style: TextStyle(
+          fontSize: screenWidth / 20 , fontWeight: FontWeight.w500, color: textColor),
     );
   }
 }
