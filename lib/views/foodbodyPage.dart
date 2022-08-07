@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:my_recipe_api/controller/popular_product_controller.dart';
+import 'package:my_recipe_api/controller/recommend_product_controller.dart';
 import 'package:my_recipe_api/model/productModel.dart';
 import 'package:my_recipe_api/utilities/app_constant.dart';
 import 'package:my_recipe_api/utilities/color.dart';
@@ -48,17 +49,22 @@ class _FoodPageBodyState extends State<FoodPageBody> {
     return Column(
       children: [
         GetBuilder<PopularProductController>(builder: (popularProducts) {
-          return Container(
-            height: 330,
-            color: Colors.yellow,
-            child: PageView.builder(
-                controller: pageController,
-                itemCount: popularProducts.popularProductList.length,
-                itemBuilder: (context, position) {
-                  return _buildPageItem(
-                      position, popularProducts.popularProductList[position]);
-                }),
-          );
+          return popularProducts.isLoaded
+              ? Container(
+                  height: 330,
+                  // color: Colors.yellow,
+                  child: PageView.builder(
+                    controller: pageController,
+                    itemCount: popularProducts.popularProductList.length,
+                    itemBuilder: (context, position) {
+                      return _buildPageItem(position,
+                          popularProducts.popularProductList[position]);
+                    },
+                  ),
+                )
+              : CircularProgressIndicator(
+                  color: ColorData.mainColor,
+                );
         }),
         GetBuilder<PopularProductController>(builder: (popularProducts) {
           return DotsIndicator(
@@ -82,7 +88,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
-              BigText(text: "Popular", textColor: Colors.black87),
+              BigText(text: "Recommend", textColor: Colors.black87),
               SizedBox(
                 width: 10,
               ),
@@ -103,87 +109,99 @@ class _FoodPageBodyState extends State<FoodPageBody> {
         SizedBox(
           height: 20,
         ),
-        ListView.builder(
-          shrinkWrap: true,
-          physics: NeverScrollableScrollPhysics(),
-          itemCount: 10,
-          itemBuilder: (context, index) {
-            return Container(
-              margin: EdgeInsets.only(left: 20, bottom: 20),
-              child: Row(
-                children: [
-                  Container(
-                    height: 120,
-                    width: 120,
-                    decoration: BoxDecoration(
-                      color: Colors.amber,
-                      borderRadius: BorderRadius.circular(15),
-                      image: DecorationImage(
-                          image: AssetImage("assets/img1.jpg"),
-                          fit: BoxFit.cover),
-                    ),
-                  ),
-                  Expanded(
-                    child: Container(
-                      // width: 230,
-                      margin: EdgeInsets.only(right: 10),
-                      height: 100,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.only(
-                            topRight: Radius.circular(20),
-                            bottomRight: Radius.circular(20),
+        GetBuilder<RecommendedProductController>(builder: (recommendProducts) {
+          return recommendProducts.isLoaded
+              ? ListView.builder(
+                  shrinkWrap: true,
+                  physics: NeverScrollableScrollPhysics(),
+                  itemCount: recommendProducts.recommendedProductList.length,
+                  itemBuilder: (context, index) {
+                    return Container(
+                      margin: EdgeInsets.only(left: 20, bottom: 20),
+                      child: Row(
+                        children: [
+                          Container(
+                            height: 120,
+                            width: 120,
+                            decoration: BoxDecoration(
+                              color: Colors.amber,
+                              borderRadius: BorderRadius.circular(15),
+                              image: DecorationImage(
+                                  image: NetworkImage(AppConstants.BASE_URL +
+                                      AppConstants.UPLOADS_URL +
+                                      "${recommendProducts.recommendedProductList[index].img}"),
+                                  fit: BoxFit.cover),
+                            ),
                           ),
-                          color: Colors.white),
-                      child: Container(
-                        margin: EdgeInsets.only(left: 10),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            BigText(
-                                text: "Nutritious fruit meal in blabla",
-                                textColor: Colors.black),
-                            SizedBox(
-                              height: 10,
+                          Expanded(
+                            child: Container(
+                              // width: 230,
+                              margin: EdgeInsets.only(right: 10),
+                              height: 100,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.only(
+                                    topRight: Radius.circular(20),
+                                    bottomRight: Radius.circular(20),
+                                  ),
+                                  color: Colors.white),
+                              child: Container(
+                                margin: EdgeInsets.only(left: 10),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    BigText(
+                                        text:
+                                            "${recommendProducts.recommendedProductList[index].name}",
+                                        textColor: Colors.black),
+                                    SizedBox(
+                                      height: 10,
+                                    ),
+                                    SmallText(
+                                        text: "${recommendProducts.recommendedProductList[index].price}",
+                                        textColor: Colors.grey),
+                                    SizedBox(
+                                      height: 20,
+                                    ),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        IconAndWidgets(
+                                          iconData: Icons.circle_sharp,
+                                          iconColor: Colors.yellow.shade600,
+                                          txtColor: Colors.grey,
+                                          Text: 'Normal',
+                                        ),
+                                        IconAndWidgets(
+                                          iconData: Icons.location_on,
+                                          iconColor: ColorData.mainColor,
+                                          txtColor: Colors.grey,
+                                          Text: '1.7Km',
+                                        ),
+                                        IconAndWidgets(
+                                          iconData: Icons.access_time,
+                                          iconColor: Colors.yellow.shade900,
+                                          txtColor: Colors.grey,
+                                          Text: '32mins',
+                                        ),
+                                      ],
+                                    )
+                                  ],
+                                ),
+                              ),
                             ),
-                            SmallText(
-                                text: "With chinese characteristics",
-                                textColor: Colors.grey),
-                            SizedBox(
-                              height: 20,
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                IconAndWidgets(
-                                  iconData: Icons.circle_sharp,
-                                  iconColor: Colors.yellow.shade600,
-                                  txtColor: Colors.grey,
-                                  Text: 'Normal',
-                                ),
-                                IconAndWidgets(
-                                  iconData: Icons.location_on,
-                                  iconColor: ColorData.mainColor,
-                                  txtColor: Colors.grey,
-                                  Text: '1.7Km',
-                                ),
-                                IconAndWidgets(
-                                  iconData: Icons.access_time,
-                                  iconColor: Colors.yellow.shade900,
-                                  txtColor: Colors.grey,
-                                  Text: '32mins',
-                                ),
-                              ],
-                            )
-                          ],
-                        ),
+                          )
+                        ],
                       ),
-                    ),
-                  )
-                ],
-              ),
-            );
-          },
-        ),
+                    );
+                  },
+                )
+              : Center(
+                  child: CircularProgressIndicator(
+                    color: ColorData.mainColor,
+                  ),
+                );
+        })
       ],
     );
   }
@@ -226,9 +244,9 @@ class _FoodPageBodyState extends State<FoodPageBody> {
               color: index.isEven ? Colors.green.shade100 : Colors.purple,
               image: DecorationImage(
                 fit: BoxFit.cover,
-                image: NetworkImage(
-                  AppConstants.BASE_URL + "/uploads/" +"${popularProducts.img}"
-                ),
+                image: NetworkImage(AppConstants.BASE_URL +
+                    AppConstants.UPLOADS_URL +
+                    "${popularProducts.img}"),
                 // image: AssetImage("assets/img1.jpg"),
               ),
             ),
@@ -253,7 +271,9 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     // BigText(text: "${popularProduct.name}", textColor: Colors.black54),
-                    BigText(text: "${popularProducts.name}", textColor: Colors.black54),
+                    BigText(
+                        text: "${popularProducts.name}",
+                        textColor: Colors.black54),
                     SizedBox(
                       height: 5,
                     ),
@@ -272,7 +292,9 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                         SizedBox(
                           width: 5,
                         ),
-                        SmallText(text: "${popularProducts.stars}", textColor: Colors.grey),
+                        SmallText(
+                            text: "${popularProducts.stars}",
+                            textColor: Colors.grey),
                         SizedBox(
                           width: 10,
                         ),
