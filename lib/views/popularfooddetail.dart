@@ -41,9 +41,14 @@ class PopularFoodDetail extends StatelessWidget {
               children: [
                 AppIcon(
                   icon: Icons.arrow_back_ios_rounded,
+                  backgroundColor: Colors.white54,
+                  iconColor: Colors.white,
                 ),
                 AppIcon(
                   icon: Icons.shopping_cart_outlined,
+                  backgroundColor: Colors.white54,
+                  iconColor: Colors.white,
+
                 ),
               ],
             ),
@@ -95,9 +100,15 @@ class PopularFoodDetail extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  Icon(Icons.remove, color: Colors.grey,),
+                  Icon(
+                    Icons.remove,
+                    color: Colors.grey,
+                  ),
                   BigText(text: "1", textColor: Colors.black),
-                  Icon(Icons.add, color: Colors.grey,),
+                  Icon(
+                    Icons.add,
+                    color: Colors.grey,
+                  ),
                 ],
               ),
             ),
@@ -109,7 +120,7 @@ class PopularFoodDetail extends StatelessWidget {
                   color: ColorData.buttonColor),
               child: Center(
                   child: BigText(
-                      text: "Rp.10.000 Add to cart", textColor: Colors.white)),
+                      text: "\$10 Add to cart", textColor: Colors.white)),
             ),
           ],
         ),

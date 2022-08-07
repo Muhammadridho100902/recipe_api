@@ -1,6 +1,10 @@
 // ignore_for_file: prefer_const_constructors, sized_box_for_whitespace, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:my_recipe_api/controller/popular_product_controller.dart';
+import 'package:my_recipe_api/model/productModel.dart';
+import 'package:my_recipe_api/utilities/app_constant.dart';
 import 'package:my_recipe_api/utilities/color.dart';
 import 'package:my_recipe_api/widgets/IconAndWidgets.dart';
 import 'package:my_recipe_api/widgets/bigText.dart';
@@ -44,26 +48,27 @@ class _FoodPageBodyState extends State<FoodPageBody> {
     return Column(
       children: [
         Container(
-          height: 330,
-          // color: Colors.yellow,
-          child: PageView.builder(
-              controller: pageController,
-              itemCount: 5,
-              itemBuilder: (context, position) {
-                return _buildPageItem(position);
-              }),
+            height: 330,
+            color: Colors.yellow,
+            child: PageView.builder(
+                controller: pageController,
+                itemCount: 5,
+                itemBuilder: (context, position) {
+                  return _buildPageItem(position);
+                }),
         ),
         DotsIndicator(
-          dotsCount: 5,
-          position: _currentPage,
-          decorator: DotsDecorator(
-            size: const Size.square(9.0),
-            activeSize: const Size(18.0, 9.0),
-            activeColor: ColorData.mainColor,
-            activeShape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(5.0)),
+            dotsCount:5,
+            position: _currentPage,
+            decorator: DotsDecorator(
+              size: const Size.square(9.0),
+              activeSize: const Size(18.0, 9.0),
+              activeColor: ColorData.mainColor,
+              activeShape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(5.0)),
+            ),
           ),
-        ),
+        
         SizedBox(
           height: 30,
         ),
@@ -90,7 +95,9 @@ class _FoodPageBodyState extends State<FoodPageBody> {
             ],
           ),
         ),
-        SizedBox(height: 20,),
+        SizedBox(
+          height: 20,
+        ),
         ListView.builder(
           shrinkWrap: true,
           physics: NeverScrollableScrollPhysics(),
@@ -214,7 +221,10 @@ class _FoodPageBodyState extends State<FoodPageBody> {
               color: index.isEven ? Colors.green.shade100 : Colors.purple,
               image: DecorationImage(
                 fit: BoxFit.cover,
-                image: AssetImage("assets/img1.jpg"),
+                // image: NetworkImage(
+                //   AppConstants.BASE_URL + "${popularProduct.img}" 
+                // ),
+                image: AssetImage("assets/img1.jpg")
               ),
             ),
           ),
@@ -237,6 +247,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    // BigText(text: "${popularProduct.name}", textColor: Colors.black54),
                     BigText(text: "Food Name", textColor: Colors.black54),
                     SizedBox(
                       height: 5,

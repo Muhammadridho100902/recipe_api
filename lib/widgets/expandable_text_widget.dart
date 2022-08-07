@@ -54,7 +54,7 @@ class _Expandable_TextState extends State<Expandable_Text> {
                 },
                 child: Row(
                   children:  [
-                    SmallText(text: "Show More", textColor: ColorData.mainColor),
+                    const SmallText(text: "Show More", textColor: ColorData.mainColor),
                     Icon(hiddenText?Icons.arrow_drop_down:Icons.arrow_drop_up, color: ColorData.mainColor,)
                   ],
                 ),

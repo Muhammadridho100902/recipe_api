@@ -4,9 +4,15 @@ import 'package:flutter/material.dart';
 
 class AppIcon extends StatelessWidget {
   final IconData icon;
+  final Color backgroundColor;
+  final Color iconColor;
+  final double iconSize;
   const AppIcon({
     Key? key,
     required this.icon,
+    required this.backgroundColor,
+    required this.iconColor,
+    this.iconSize = 20,
   }) : super(key: key);
 
   @override
@@ -15,14 +21,16 @@ class AppIcon extends StatelessWidget {
       width: 40,
       height: 40,
       decoration: BoxDecoration(
-        color: Colors.white54,
+        // color: Colors.white54,
+        color: backgroundColor,
         borderRadius: BorderRadius.circular(20),
       ),
       child: Center(
         child: Icon(
           icon,
-          size: 20,
-          color: Colors.black54,
+          size: iconSize,
+          // color: Colors.black54,
+          color: iconColor,
         ),
       ),
     );
