@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'package:get/get.dart';
 import 'package:my_recipe_api/data/Repository/recommend_product_repo.dart';
 import 'package:my_recipe_api/model/productModel.dart';

@@ -4,10 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:my_recipe_api/controller/popular_product_controller.dart';
 import 'package:my_recipe_api/controller/recommend_product_controller.dart';
+import 'package:my_recipe_api/routes/app_routes.dart';
 import 'package:my_recipe_api/views/Home.dart';
-import 'package:my_recipe_api/views/foodbodyPage.dart';
-import 'package:my_recipe_api/views/popularfooddetail.dart';
-import 'package:my_recipe_api/widgets/recommendFoodDetail.dart';
 import 'Helper/dependencies.dart' as dep;
 
 // step 6 add dependencies init
@@ -30,6 +28,8 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(),
       home: HomePage(),
+      initialRoute: AppRoutes.initial,
+      getPages: AppRoutes.routes,
     );
   }
 }

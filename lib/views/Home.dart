@@ -1,5 +1,6 @@
-// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
+// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors, file_names
 
+import 'package:elegant_notification/elegant_notification.dart';
 import 'package:flutter/material.dart';
 import 'package:my_recipe_api/utilities/color.dart';
 import 'package:my_recipe_api/widgets/bigText.dart';
@@ -37,19 +38,27 @@ class HomePage extends StatelessWidget {
                     ),
                   ],
                 ),
-                Container(
-                  width: 45,
-                  height: 45,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(15),
-                    color: ColorData.buttonColor,
+                GestureDetector(
+                  onTap: () {
+                    ElegantNotification.info(
+                      title: Text("Notification"),
+                      description: Text("This Feature will be available soon"),
+                    ).show(context);
+                  },
+                  child: Container(
+                    width: 45,
+                    height: 45,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(15),
+                      color: ColorData.buttonColor,
+                    ),
+                    child: Center(
+                        child: Icon(
+                      Icons.search,
+                      size: 20,
+                      color: Colors.white,
+                    )),
                   ),
-                  child: Center(
-                      child: Icon(
-                    Icons.search,
-                    size: 20,
-                    color: Colors.white,
-                  )),
                 )
               ],
             ),

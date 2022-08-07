@@ -1,15 +1,21 @@
-// ignore_for_file: unnecessary_const
+// ignore_for_file: unnecessary_const, prefer_const_constructors, file_names
 
 import 'package:flutter/material.dart';
 import 'package:my_recipe_api/utilities/color.dart';
-import 'package:my_recipe_api/widgets/IconAndWidgets.dart';
 import 'package:my_recipe_api/widgets/bigText.dart';
 import 'package:my_recipe_api/widgets/expandable_text_widget.dart';
 import 'package:my_recipe_api/widgets/smallText.dart';
 
 class AppColumn extends StatelessWidget {
+  final String foodName;
+  final String desc;
+  final String star;
+  final String price;
   const AppColumn({
     Key? key,
+    required this.foodName,
+    required this.desc,
+    required this.star,required this.price,
   }) : super(key: key);
 
   @override
@@ -17,8 +23,8 @@ class AppColumn extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const BigText(text: "Briani", textColor: Colors.black),
-        const SizedBox(
+        BigText(text: foodName, textColor: Colors.black),
+        SizedBox(
           height: 10,
         ),
         Row(
@@ -36,7 +42,7 @@ class AppColumn extends StatelessWidget {
             const SizedBox(
               width: 10,
             ),
-            const SmallText(text: "4.5", textColor: Colors.grey),
+            SmallText(text: star, textColor: Colors.grey),
             const SizedBox(
               width: 10,
             ),
@@ -48,48 +54,51 @@ class AppColumn extends StatelessWidget {
           ],
         ),
         const SizedBox(
-          height: 30,
+          height: 10,
         ),
         Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            IconAndWidgets(
-              iconData: Icons.circle_sharp,
-              iconColor: Colors.yellow.shade600,
-              txtColor: Colors.grey,
-              Text: 'Normal',
-            ),
-            const SizedBox(
-              width: 10,
-            ),
-            const IconAndWidgets(
-              iconData: Icons.location_on,
-              iconColor: ColorData.mainColor,
-              txtColor: Colors.grey,
-              Text: '1.7Km',
-            ),
-            const SizedBox(
-              width: 10,
-            ),
-            IconAndWidgets(
-              iconData: Icons.access_time,
-              iconColor: Colors.yellow.shade900,
-              txtColor: Colors.grey,
-              Text: '32mins',
-            ),
+            SmallText(text: "Price : \$ ", textColor: Colors.black,sizetxt: 18),
+            SmallText(text: price, textColor: Colors.black, sizetxt: 18,),
           ],
         ),
+        // Row(
+        //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        //   children: [
+        //     IconAndWidgets(
+        //       iconData: Icons.circle_sharp,
+        //       iconColor: Colors.yellow.shade600,
+        //       txtColor: Colors.grey,
+        //       Text: 'Normal',
+        //     ),
+        //     const SizedBox(
+        //       width: 10,
+        //     ),
+        //     const IconAndWidgets(
+        //       iconData: Icons.location_on,
+        //       iconColor: ColorData.mainColor,
+        //       txtColor: Colors.grey,
+        //       Text: '1.7Km',
+        //     ),
+        //     const SizedBox(
+        //       width: 10,
+        //     ),
+        //     IconAndWidgets(
+        //       iconData: Icons.access_time,
+        //       iconColor: Colors.yellow.shade900,
+        //       txtColor: Colors.grey,
+        //       Text: '32mins',
+        //     ),
+        //   ],
+        // ),
         const SizedBox(
-          height: 30,
+          height: 10,
         ),
-        const BigText(text: "Introduce", textColor: Colors.black),
-        const SizedBox(height: 10,),
-        const SingleChildScrollView(
-            scrollDirection: Axis.vertical,
-            child: const Expandable_Text(
-              text:
-                  'This is an e-commerce app for food delivery using flutter with backend as crash course tutorial for iOS and Android. This is a shopping app with backend of Laravel and Laravel admin panel using restful api complete CRUD operations. We also used firebase for notification. This tutorial covers complete shopping cart, placing orders, signup or registration, sign-in or login, payment.',
-            ))
+        BigText(text: "Introduce", textColor: Colors.black),
+        const SizedBox(
+          height: 10,
+        ),
+        Expandable_Text(text: desc)
       ],
     );
   }

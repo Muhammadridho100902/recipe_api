@@ -1,3 +1,5 @@
+// ignore_for_file: unused_field, prefer_const_constructors
+
 import 'package:get/get.dart';
 import 'package:my_recipe_api/utilities/app_constant.dart';
 

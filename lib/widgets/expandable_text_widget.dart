@@ -1,4 +1,4 @@
-// ignore_for_file: camel_case_types
+// ignore_for_file: camel_case_types, prefer_const_constructors_in_immutables, non_constant_identifier_names
 
 import 'package:flutter/material.dart';
 import 'package:my_recipe_api/utilities/color.dart';
@@ -6,7 +6,7 @@ import 'package:my_recipe_api/widgets/smallText.dart';
 
 class Expandable_Text extends StatefulWidget {
   final String text;
-  const Expandable_Text({
+  Expandable_Text({
     Key? key,
     required this.text,
   }) : super(key: key);
@@ -26,7 +26,6 @@ class _Expandable_TextState extends State<Expandable_Text> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     if (widget.text.length > textHeight) {
       firstHalf = widget.text.substring(0, textHeight.toInt());
@@ -44,23 +43,35 @@ class _Expandable_TextState extends State<Expandable_Text> {
       child: SecondHalf.isEmpty
           ? SmallText(text: firstHalf, textColor: Colors.black)
           : Column(
-            children: [
-              SmallText(text: hiddenText?(firstHalf + "..."):(firstHalf+SecondHalf), textColor: Colors.grey),
-              InkWell(
-                onTap: (){
-                  setState(() {
-                    hiddenText = !hiddenText;
-                  });
-                },
-                child: Row(
-                  children:  [
-                    const SmallText(text: "Show More", textColor: ColorData.mainColor),
-                    Icon(hiddenText?Icons.arrow_drop_down:Icons.arrow_drop_up, color: ColorData.mainColor,)
-                  ],
+              children: [
+                SmallText(
+                  text: hiddenText
+                      ? (firstHalf + "...")
+                      : (firstHalf + SecondHalf),
+                  textColor: Colors.grey,
+                  sizetxt: 14,
                 ),
-              )
-            ],
-          ),
+                InkWell(
+                  onTap: () {
+                    setState(() {
+                      hiddenText = !hiddenText;
+                    });
+                  },
+                  child: Row(
+                    children: [
+                      const SmallText(
+                          text: "Show More", textColor: ColorData.mainColor),
+                      Icon(
+                        hiddenText
+                            ? Icons.arrow_drop_down
+                            : Icons.arrow_drop_up,
+                        color: ColorData.mainColor,
+                      )
+                    ],
+                  ),
+                )
+              ],
+            ),
     );
   }
 }

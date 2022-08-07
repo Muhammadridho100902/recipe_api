@@ -1,7 +1,6 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, non_constant_identifier_names, file_names
 
 import 'package:flutter/material.dart';
-import 'package:my_recipe_api/utilities/color.dart';
 import 'package:my_recipe_api/widgets/smallText.dart';
 
 class IconAndWidgets extends StatelessWidget {

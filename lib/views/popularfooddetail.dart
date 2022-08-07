@@ -1,18 +1,25 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, must_be_immutable, prefer_adjacent_string_concatenation
 
+import 'package:elegant_notification/elegant_notification.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:my_recipe_api/controller/recommend_product_controller.dart';
+import 'package:my_recipe_api/utilities/app_constant.dart';
 import 'package:my_recipe_api/utilities/color.dart';
-import 'package:my_recipe_api/widgets/IconAndWidgets.dart';
+import 'package:my_recipe_api/views/Home.dart';
 import 'package:my_recipe_api/widgets/appColumn.dart';
 import 'package:my_recipe_api/widgets/appIcon.dart';
 import 'package:my_recipe_api/widgets/bigText.dart';
-import 'package:my_recipe_api/widgets/smallText.dart';
 
 class PopularFoodDetail extends StatelessWidget {
-  const PopularFoodDetail({Key? key}) : super(key: key);
+  int pageId;
+  PopularFoodDetail({Key? key, required this.pageId}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    var product =
+        Get.find<RecommendedProductController>().recommendedProductList[pageId];
+    // print("Food Name is " + product.name.toString());
     return Scaffold(
       body: Stack(
         children: [
@@ -21,14 +28,13 @@ class PopularFoodDetail extends StatelessWidget {
             right: 0,
             child: Container(
               width: double.maxFinite,
-              height: 350,
+              height: 380,
               decoration: BoxDecoration(
                 image: DecorationImage(
-                  fit: BoxFit.cover,
-                  image: AssetImage(
-                    "assets/img1.jpg",
-                  ),
-                ),
+                    fit: BoxFit.cover,
+                    image: NetworkImage(AppConstants.BASE_URL +
+                        AppConstants.UPLOADS_URL +
+                        product.img!)),
               ),
             ),
           ),
@@ -39,16 +45,28 @@ class PopularFoodDetail extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                AppIcon(
-                  icon: Icons.arrow_back_ios_rounded,
-                  backgroundColor: Colors.white54,
-                  iconColor: Colors.white,
+                GestureDetector(
+                  onTap: () {
+                    Get.to((HomePage()));
+                  },
+                  child: AppIcon(
+                    icon: Icons.arrow_back_ios_rounded,
+                    backgroundColor: Colors.white54,
+                    iconColor: Color.fromARGB(255, 0, 0, 0),
+                  ),
                 ),
-                AppIcon(
-                  icon: Icons.shopping_cart_outlined,
-                  backgroundColor: Colors.white54,
-                  iconColor: Colors.white,
-
+                GestureDetector(
+                  onTap: () {
+                    ElegantNotification.info(
+                      title: Text("Notification"),
+                      description: Text("This Feature will be available soon"),
+                    ).show(context);
+                  },
+                  child: AppIcon(
+                    icon: Icons.shopping_cart_outlined,
+                    backgroundColor: Colors.white54,
+                    iconColor: Color.fromARGB(255, 0, 0, 0),
+                  ),
                 ),
               ],
             ),
@@ -56,7 +74,7 @@ class PopularFoodDetail extends StatelessWidget {
           Positioned(
             left: 0,
             right: 0,
-            top: 310,
+            top: 280,
             child: Container(
               height: MediaQuery.of(context).size.height,
               padding: EdgeInsets.only(
@@ -72,7 +90,12 @@ class PopularFoodDetail extends StatelessWidget {
               ),
               child: Column(
                 children: [
-                  AppColumn(),
+                  AppColumn(
+                    foodName: "${product.name}",
+                    desc: "${product.description}",
+                    star: '${product.stars}',
+                    price: '${product.price}',
+                  ),
                 ],
               ),
             ),
@@ -80,7 +103,7 @@ class PopularFoodDetail extends StatelessWidget {
         ],
       ),
       bottomNavigationBar: Container(
-        height: 120,
+        height: 100,
         padding: EdgeInsets.only(top: 30, bottom: 30, left: 20, right: 20),
         decoration: BoxDecoration(
           color: Colors.grey.shade300,
@@ -112,15 +135,24 @@ class PopularFoodDetail extends StatelessWidget {
                 ],
               ),
             ),
-            Container(
-              height: 70,
-              width: 240,
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20),
-                  color: ColorData.buttonColor),
-              child: Center(
-                  child: BigText(
-                      text: "\$10 Add to cart", textColor: Colors.white)),
+            GestureDetector(
+              onTap: () {
+                ElegantNotification.info(
+                  title: Text("Notification"),
+                  description: Text("This Feature will be available soon"),
+                ).show(context);
+              },
+              child: Container(
+                height: 70,
+                width: 240,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20),
+                    color: ColorData.buttonColor),
+                child: Center(
+                    child: BigText(
+                        text: "\$" + "${product.price}" + " " + "Add to cart",
+                        textColor: Colors.white)),
+              ),
             ),
           ],
         ),

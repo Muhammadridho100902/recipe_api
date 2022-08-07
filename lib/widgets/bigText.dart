@@ -1,13 +1,12 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, file_names, prefer_const_constructors_in_immutables, unused_local_variable
 
 import 'package:flutter/material.dart';
-import 'package:my_recipe_api/utilities/color.dart';
 
 class BigText extends StatelessWidget {
   final String text;
   final Color textColor;
   final dynamic txtWeight;
-  const BigText({
+  BigText({
     Key? key,
     required this.text,
     required this.textColor,
