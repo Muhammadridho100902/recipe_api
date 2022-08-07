@@ -9,7 +9,7 @@ import 'package:my_recipe_api/utilities/app_constant.dart';
 Future<void> iniit()async{
 
   // step 5 create a lazy put for api client, repo, controller
-  Get.lazyPut(() => ApiClient(appBaseUrl:  "http://mvs.bslmeiyu.com"));
+  Get.lazyPut(() => ApiClient(appBaseUrl:  AppConstants.BASE_URL));
 
   Get.lazyPut(() => PopularProductRepo(apiClient: Get.find()));
 

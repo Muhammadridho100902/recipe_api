@@ -47,28 +47,33 @@ class _FoodPageBodyState extends State<FoodPageBody> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Container(
+        GetBuilder<PopularProductController>(builder: (popularProducts) {
+          return Container(
             height: 330,
             color: Colors.yellow,
             child: PageView.builder(
                 controller: pageController,
-                itemCount: 5,
+                itemCount: popularProducts.popularProductList.length,
                 itemBuilder: (context, position) {
-                  return _buildPageItem(position);
+                  return _buildPageItem(
+                      position, popularProducts.popularProductList[position]);
                 }),
-        ),
-        DotsIndicator(
-            dotsCount:5,
-            position: _currentPage,
-            decorator: DotsDecorator(
-              size: const Size.square(9.0),
-              activeSize: const Size(18.0, 9.0),
-              activeColor: ColorData.mainColor,
-              activeShape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(5.0)),
-            ),
-          ),
-        
+          );
+        }),
+        GetBuilder<PopularProductController>(builder: (popularProducts) {
+          return DotsIndicator(
+              dotsCount: popularProducts.popularProductList.isEmpty
+                  ? 1
+                  : popularProducts.popularProductList.length,
+              position: _currentPage,
+              decorator: DotsDecorator(
+                size: const Size.square(9.0),
+                activeSize: const Size(18.0, 9.0),
+                activeColor: ColorData.mainColor,
+                activeShape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(5.0)),
+              ));
+        }),
         SizedBox(
           height: 30,
         ),
@@ -183,7 +188,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
     );
   }
 
-  Widget _buildPageItem(int index) {
+  Widget _buildPageItem(int index, ProductModel popularProducts) {
     Matrix4 matrix = Matrix4.identity();
     if (index == _currentPage.floor()) {
       var currScale = 1 - (_currentPage - index) * (1 - _scaleFactor);
@@ -221,10 +226,10 @@ class _FoodPageBodyState extends State<FoodPageBody> {
               color: index.isEven ? Colors.green.shade100 : Colors.purple,
               image: DecorationImage(
                 fit: BoxFit.cover,
-                // image: NetworkImage(
-                //   AppConstants.BASE_URL + "${popularProduct.img}" 
-                // ),
-                image: AssetImage("assets/img1.jpg")
+                image: NetworkImage(
+                  AppConstants.BASE_URL + "/uploads/" +"${popularProducts.img}"
+                ),
+                // image: AssetImage("assets/img1.jpg"),
               ),
             ),
           ),
@@ -248,7 +253,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     // BigText(text: "${popularProduct.name}", textColor: Colors.black54),
-                    BigText(text: "Food Name", textColor: Colors.black54),
+                    BigText(text: "${popularProducts.name}", textColor: Colors.black54),
                     SizedBox(
                       height: 5,
                     ),
@@ -267,7 +272,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                         SizedBox(
                           width: 5,
                         ),
-                        SmallText(text: "4.5", textColor: Colors.grey),
+                        SmallText(text: "${popularProducts.stars}", textColor: Colors.grey),
                         SizedBox(
                           width: 10,
                         ),
