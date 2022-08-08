@@ -3,6 +3,7 @@
 import 'package:elegant_notification/elegant_notification.dart';
 import 'package:flutter/material.dart';
 import 'package:my_recipe_api/utilities/color.dart';
+import 'package:my_recipe_api/utilities/dimension.dart';
 import 'package:my_recipe_api/widgets/bigText.dart';
 import 'package:my_recipe_api/views/foodbodyPage.dart';
 import 'package:my_recipe_api/widgets/smallText.dart';
@@ -46,10 +47,10 @@ class HomePage extends StatelessWidget {
                     ).show(context);
                   },
                   child: Container(
-                    width: 45,
-                    height: 45,
+                    width: Dimensions.height45,
+                    height: Dimensions.width45,
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(15),
+                      borderRadius: BorderRadius.circular(Dimensions.radius15),
                       color: ColorData.buttonColor,
                     ),
                     child: Center(

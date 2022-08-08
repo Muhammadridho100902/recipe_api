@@ -58,8 +58,8 @@ class AppColumn extends StatelessWidget {
         ),
         Row(
           children: [
-            SmallText(text: "Price : \$ ", textColor: Colors.black,sizetxt: 18),
-            SmallText(text: price, textColor: Colors.black, sizetxt: 18,),
+            SmallText(text: "Price : \$ ", textColor: Colors.black,),
+            SmallText(text: price, textColor: Colors.black),
           ],
         ),
         // Row(

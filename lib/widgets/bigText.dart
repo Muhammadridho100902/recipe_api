@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors, file_names, prefer_const_constructors_in_immutables, unused_local_variable
 
 import 'package:flutter/material.dart';
+import 'package:my_recipe_api/utilities/dimension.dart';
 
 class BigText extends StatelessWidget {
   final String text;
@@ -23,7 +24,7 @@ class BigText extends StatelessWidget {
       maxLines: 1,
       overflow: TextOverflow.ellipsis,
       style: TextStyle(
-          fontSize: screenWidth / 20,
+          fontSize: 20,
           fontWeight: txtWeight,
           color: textColor),
     );

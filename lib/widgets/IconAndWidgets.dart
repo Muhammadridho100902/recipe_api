@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors, non_constant_identifier_names, file_names
 
 import 'package:flutter/material.dart';
+import 'package:my_recipe_api/utilities/dimension.dart';
 import 'package:my_recipe_api/widgets/smallText.dart';
 
 class IconAndWidgets extends StatelessWidget {
@@ -20,12 +21,18 @@ class IconAndWidgets extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        Icon(iconData,
-        color: iconColor,),
+        Icon(
+          iconData,
+          color: iconColor,
+          size: Dimensions.iconSize16,
+        ),
         SizedBox(
           width: 5,
         ),
-        SmallText(text: Text, textColor: txtColor),
+        SmallText(
+          text: Text,
+          textColor: txtColor,
+        ),
       ],
     );
   }

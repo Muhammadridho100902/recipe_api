@@ -7,6 +7,7 @@ import 'package:my_recipe_api/controller/popular_product_controller.dart';
 import 'package:my_recipe_api/routes/app_routes.dart';
 import 'package:my_recipe_api/utilities/app_constant.dart';
 import 'package:my_recipe_api/utilities/color.dart';
+import 'package:my_recipe_api/utilities/dimension.dart';
 import 'package:my_recipe_api/widgets/appIcon.dart';
 import 'package:my_recipe_api/widgets/bigText.dart';
 import 'package:my_recipe_api/widgets/expandable_text_widget.dart';
@@ -114,7 +115,7 @@ class RecommendFoodDetail extends StatelessWidget {
                   iconSize: 36,
                 ),
                 BigText(
-                  text: "\$12.88" + "x" + "0",
+                  text: "\$ ${product.price} x " + "0",
                   textColor: Colors.black54,
                   txtWeight: FontWeight.bold,
                 ),
@@ -128,8 +129,9 @@ class RecommendFoodDetail extends StatelessWidget {
             ),
           ),
           Container(
-            padding: EdgeInsets.only(left: 20, right: 20),
-            height: 130,
+            padding: EdgeInsets.only(
+                left: Dimensions.width20, right: Dimensions.width20),
+            height: Dimensions.height120,
             decoration: BoxDecoration(
               color: Colors.grey.shade300,
               borderRadius: BorderRadius.only(
@@ -148,10 +150,11 @@ class RecommendFoodDetail extends StatelessWidget {
                     ).show(context);
                   },
                   child: Container(
-                    height: 70,
-                    width: 70,
+                    height: MediaQuery.of(context).size.height / 12,
+                    width: MediaQuery.of(context).size.width / 5,
                     decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
+                        borderRadius:
+                            BorderRadius.circular(Dimensions.radius20),
                         color: Colors.white),
                     child: Center(
                       child: Icon(
@@ -169,14 +172,15 @@ class RecommendFoodDetail extends StatelessWidget {
                     ).show(context);
                   },
                   child: Container(
-                    height: 70,
-                    width: 240,
+                    height: MediaQuery.of(context).size.height / 12,
+                    width: MediaQuery.of(context).size.width / 2,
                     decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
+                        borderRadius:
+                            BorderRadius.circular(Dimensions.radius20),
                         color: ColorData.mainColor),
                     child: Center(
                         child: BigText(
-                            text: "Rp.10.000 Add to cart",
+                            text: "\$ ${product.price} Add to cart",
                             textColor: Colors.white)),
                   ),
                 ),
