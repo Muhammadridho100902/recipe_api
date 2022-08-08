@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:my_recipe_api/controller/recommend_product_controller.dart';
 import 'package:my_recipe_api/utilities/app_constant.dart';
 import 'package:my_recipe_api/utilities/color.dart';
+import 'package:my_recipe_api/utilities/dimension.dart';
 import 'package:my_recipe_api/views/Home.dart';
 import 'package:my_recipe_api/widgets/appColumn.dart';
 import 'package:my_recipe_api/widgets/appIcon.dart';
@@ -78,9 +79,9 @@ class PopularFoodDetail extends StatelessWidget {
             child: Container(
               height: MediaQuery.of(context).size.height,
               padding: EdgeInsets.only(
-                left: 20,
-                right: 20,
-                top: 20,
+                left: MediaQuery.of(context).size.width/15,
+                right: Dimensions.width20,
+                top: Dimensions.height20,
               ),
               decoration: BoxDecoration(
                 color: Colors.white,
@@ -103,23 +104,28 @@ class PopularFoodDetail extends StatelessWidget {
         ],
       ),
       bottomNavigationBar: Container(
-        height: 100,
-        padding: EdgeInsets.only(top: 30, bottom: 30, left: 20, right: 20),
+        height: Dimensions.height100,
+        padding: EdgeInsets.only(
+            top: Dimensions.height30,
+            bottom: Dimensions.height30,
+            left: MediaQuery.of(context).size.width/15,
+            right: MediaQuery.of(context).size.width/15),
         decoration: BoxDecoration(
           color: Colors.grey.shade300,
           borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(20),
-            topRight: Radius.circular(20),
+            topLeft: Radius.circular(Dimensions.radius20),
+            topRight: Radius.circular(Dimensions.radius20),
           ),
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Container(
-              height: 70,
-              width: 90,
+              height: MediaQuery.of(context).size.height / 12,
+              width: MediaQuery.of(context).size.width / 4,
               decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20), color: Colors.white),
+                  borderRadius: BorderRadius.circular(Dimensions.radius20),
+                  color: Colors.white),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
@@ -135,6 +141,7 @@ class PopularFoodDetail extends StatelessWidget {
                 ],
               ),
             ),
+            // SizedBox(width: Dimensions.height20),
             GestureDetector(
               onTap: () {
                 ElegantNotification.info(
@@ -143,8 +150,8 @@ class PopularFoodDetail extends StatelessWidget {
                 ).show(context);
               },
               child: Container(
-                height: 70,
-                width: 240,
+                height: MediaQuery.of(context).size.height / 12,
+                width: MediaQuery.of(context).size.width / 2,
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(20),
                     color: ColorData.buttonColor),

@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors, file_names
 
 import 'package:flutter/material.dart';
+import 'package:my_recipe_api/utilities/dimension.dart';
 
 class AppIcon extends StatelessWidget {
   final IconData icon;
@@ -23,7 +24,7 @@ class AppIcon extends StatelessWidget {
       decoration: BoxDecoration(
         // color: Colors.white54,
         color: backgroundColor,
-        borderRadius: BorderRadius.circular(20),
+        borderRadius: BorderRadius.circular(Dimensions.radius20),
       ),
       child: Center(
         child: Icon(

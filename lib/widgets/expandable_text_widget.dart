@@ -49,7 +49,6 @@ class _Expandable_TextState extends State<Expandable_Text> {
                       ? (firstHalf + "...")
                       : (firstHalf + SecondHalf),
                   textColor: Colors.grey,
-                  sizetxt: 14,
                 ),
                 InkWell(
                   onTap: () {

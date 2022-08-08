@@ -1,15 +1,14 @@
 // ignore_for_file: prefer_const_constructors, file_names, unnecessary_string_interpolations, unnecessary_brace_in_string_interps
-
 import 'package:flutter/material.dart';
+import 'package:my_recipe_api/utilities/dimension.dart';
 
 class SmallText extends StatelessWidget {
   final String text;
   final Color textColor;
-  final double ?sizetxt;
   const SmallText({
     Key? key,
     required this.text,
-    required this.textColor, this.sizetxt,
+    required this.textColor,
   }) : super(key: key);
 
   @override
@@ -21,7 +20,7 @@ class SmallText extends StatelessWidget {
       style: TextStyle(
         color: textColor,
         fontWeight: FontWeight.w400,
-        fontSize: sizetxt
+        fontSize: 12
       ),
     );
   }
